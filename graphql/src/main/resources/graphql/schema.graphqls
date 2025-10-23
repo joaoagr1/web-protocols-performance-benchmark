@@ -1,0 +1,32 @@
+# Define o tipo de dado para um Produto
+type Produto {
+    id: ID!
+    nome: String!
+    descricao: String
+    preco: Float!
+    estoque: Int!
+}
+
+# Define as operações de LEITURA (Queries) disponíveis
+type Query {
+    # Retorna um único produto pelo seu ID
+    produtoPorId(id: ID!): Produto
+
+    # Retorna uma lista de todos os produtos
+    todosProdutos: [Produto]
+}
+
+# Define um tipo de entrada para criar/atualizar produtos.
+# É uma boa prática usar um tipo de input para mutações.
+input ProdutoInput {
+    nome: String!
+    descricao: String
+    preco: Float!
+    estoque: Int!
+}
+
+# Define as operações de ESCRITA (Mutations) disponíveis
+type Mutation {
+    # Adiciona um novo produto e retorna o produto criado
+    adicionarProduto(produto: ProdutoInput!): Produto
+}
