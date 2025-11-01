@@ -1,0 +1,61 @@
+<definitions name="ProductsService"
+             targetNamespace="http://example.com/products"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/products"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema targetNamespace="http://example.com/products">
+            <xsd:element name="GetProductRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetProductResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:int"/>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="price" type="xsd:float"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="GetProductInput">
+        <part name="parameters" element="tns:GetProductRequest"/>
+    </message>
+    <message name="GetProductOutput">
+        <part name="parameters" element="tns:GetProductResponse"/>
+    </message>
+
+    <portType name="ProductsPortType">
+        <operation name="GetProduct">
+            <input message="tns:GetProductInput"/>
+            <output message="tns:GetProductOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="ProductsBinding" type="tns:ProductsPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetProduct">
+            <soap:operation soapAction="GetProduct"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ProductsService">
+        <port name="ProductsPort" binding="tns:ProductsBinding">
+            <soap:address location="http://localhost:8000/products"/>
+        </port>
+    </service>
+</definitions>
