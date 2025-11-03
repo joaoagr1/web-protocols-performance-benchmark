@@ -11,7 +11,7 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
-@EnableWs // Habilita as funcionalidades de Web Service SOAP
+@EnableWs
 @Configuration
 public class WebServiceConfig {
 
@@ -20,10 +20,10 @@ public class WebServiceConfig {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean<>(servlet, "/ws/*"); // Define a URL base para os serviços
+        return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
-    @Bean(name = "produtos") // O nome do bean define o nome do arquivo WSDL (produtos.wsdl)
+    @Bean(name = "produtos")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema productsSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("ProdutosPort");

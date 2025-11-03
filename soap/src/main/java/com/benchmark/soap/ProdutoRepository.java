@@ -17,7 +17,7 @@ public class ProdutoRepository {
 
     @PostConstruct
     public void initData() {
-        // Dados iniciais para teste
+
         Produto p1 = new Produto();
         p1.setId(++idCounter);
         p1.setNome("Notebook Pro");
